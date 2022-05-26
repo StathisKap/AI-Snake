@@ -31,8 +31,8 @@ def draw_square(x, y, size, colour=(0, 0, 255, 0)):
 
 def place_food():
     global fd_x, fd_y
-    fd_x = randint(0, window.width // cell_size) * cell_size
-    fd_y = randint(0, window.height // cell_size) * cell_size
+    fd_x = randint(0, (window.width // cell_size) - 1) * cell_size
+    fd_y = randint(0, (window.height // cell_size) - 1) * cell_size
 
 @window.event
 def on_key_press(symbol, modifiers):
@@ -69,6 +69,7 @@ def update(dt):
     tail.append((snk_x, snk_y))
     if snk_x == fd_x and snk_y == fd_y:
         place_food()
+        print(fd_x, fd_y)
     else:
         tail.pop(0)
     
@@ -97,13 +98,15 @@ def update(dt):
         game_over = True 
 
 
-cell_size = 20
+cell_size = 10
 
 snk_dx, snk_dy = 0, 0
 snk_x = window.width // cell_size // 2 * cell_size
 snk_y = window.height // cell_size // 2 * cell_size
 
-fd_x, fd_y = 0, 0
+fd_x = randint(0, (window.width // cell_size) - 1) * cell_size
+fd_y = randint(0, (window.height // cell_size) - 1) * cell_size
+
 tail = [(snk_x, snk_y)]
 
 font_size = 18
